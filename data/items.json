@@ -1,0 +1,26 @@
+{
+	"items": [
+		{
+			"name": "test button 01",
+			"url": "items/btn-01.html",
+			"meta": {
+				"author": {
+					"name": "Georg Fischer",
+					"url": "http://snorpey.com",
+					"date": "2017"
+				}
+			}
+		},
+		{
+			"name": "test button 02",
+			"url": "items/btn-02.html",
+			"meta": {
+				"author": {
+					"name": "Georg Fischer",
+					"url": "http://snorpey.com",
+					"date": "2017"
+				}
+			}
+		}
+	]
+}

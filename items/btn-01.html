@@ -1,0 +1,41 @@
+<button>BUTTON EINS</button>
+<style>
+button {
+	transition: all 0.3s ease;
+	opacity: 0;
+}
+
+button.loaded {
+	transform: rotate(180deg);
+	opacity: 1;
+}
+
+</style>
+<script src="api.js"></script>
+<script>
+var buttonEl = document.querySelector( 'button' );
+
+buttonEl.addEventListener( 'click', () => {
+	api.click();
+} );
+
+// everything was loaded
+api.loaded = function (argument) {
+	setTimeout( function () {
+		buttonEl.classList.add( 'loaded' );
+	}, 300 );
+};
+
+// is called 500ms before the next frame is loaded,
+// so we have time to animate out
+api.destroyCountDown = function ( remainingTime ) {
+	if ( remainingTime <= 500 ) {
+		buttonEl.classList.remove( 'loaded' );
+	}
+};
+
+// is called if the user clicks on the button multiple times
+api.clickDeclined = function () {
+	buttonEl.textContent = 'YOU CLICKED ALREADY!';
+};
+</script>
