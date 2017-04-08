@@ -5,11 +5,17 @@
 button {
 	transition: all 0.3s ease;
 	opacity: 0;
+	transform: translateX(-40px);
 }
 
 button.loaded {
-	transform: rotate(180deg);
+	transform: translateX(0);
 	opacity: 1;
+}
+
+button.is-out {
+	transform: translateX(40px);
+	opacity: 0;
 }
 
 </style>
@@ -27,10 +33,11 @@ function log ( str ) {
 buttonEl.addEventListener( 'click', function () {
 	log( 'clicked' );
 	api.click();
+	buttonEl.classList.add( 'is-out' );
 } );
 
 // everything was loaded
-api.loaded = function (argument) {
+api.loaded = function () {
 	log( 'loaded' );
 	
 	setTimeout( function () {
@@ -44,9 +51,9 @@ api.loaded = function (argument) {
 
 // is called 500ms before the next frame is loaded,
 // so we have time to animate out
-api.beforeDestroy = function ( remainingTime ) {
-	log( 'beforeDestroy ' + remainingTime );
-}
+api.beforeDestroy = function () {
+	log( 'beforeDestroy' );
+};
 
 // is called if the user clicks on the button multiple times
 api.clickDeclined = function () {
