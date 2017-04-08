@@ -1,4 +1,6 @@
 <button>BUTTON EINS</button>
+<ul class="log">
+</ul>
 <style>
 button {
 	transition: all 0.3s ease;
@@ -13,29 +15,42 @@ button.loaded {
 </style>
 <script src="api.js"></script>
 <script>
+var logEl = document.querySelector( '.log' );
 var buttonEl = document.querySelector( 'button' );
 
-buttonEl.addEventListener( 'click', () => {
+function log ( str ) {
+	var liEl = document.createElement( 'li' );
+	liEl.textContent = str;
+	logEl.appendChild( liEl );
+}
+
+buttonEl.addEventListener( 'click', function () {
+	log( 'clicked' );
 	api.click();
 } );
 
 // everything was loaded
 api.loaded = function (argument) {
+	log( 'loaded' );
+	
 	setTimeout( function () {
 		buttonEl.classList.add( 'loaded' );
 	}, 300 );
+
+	setTimeout( function () {
+		log( 'btn animatedIn' );
+	}, 600 );
 };
 
 // is called 500ms before the next frame is loaded,
 // so we have time to animate out
-api.destroyCountDown = function ( remainingTime ) {
-	if ( remainingTime <= 500 ) {
-		buttonEl.classList.remove( 'loaded' );
-	}
-};
+api.beforeDestroy = function ( remainingTime ) {
+	log( 'beforeDestroy ' + remainingTime );
+}
 
 // is called if the user clicks on the button multiple times
 api.clickDeclined = function () {
-	buttonEl.textContent = 'YOU CLICKED ALREADY!';
+	log( 'clickDeclined' );
+	// buttonEl.textContent = 'YOU CLICKED ALREADY!';
 };
 </script>
