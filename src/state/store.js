@@ -20,13 +20,6 @@ const mutations = {
 		item.id = stringToSlug( item.name || 'item-' + state.items.length );
 		state.items.push( item );
 	},
-	next ( state ) {
-		if ( state.currentItemIndex >= state.items.length - 1 ) {
-			state.currentItemIndex = 0;
-		} else {
-			state.currentItemIndex++;
-		}
-	},
 	index ( state, index ) {
 		state.currentItemIndex = index;
 	}

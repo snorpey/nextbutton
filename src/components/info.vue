@@ -6,7 +6,13 @@
 	</div>
 </template>
 
-<style></style>
+<style>
+.info {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+</style>
 
 <script>
 export default {

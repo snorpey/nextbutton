@@ -1,6 +1,5 @@
 <template>
 	<div class="container">
-		<!-- <buttonframe :src="iframeSrc"></buttonframe> -->
 		<router-view/>
 		<info />
 	</div>
@@ -21,5 +20,18 @@ export default {
 </script>
 
 <style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
+body {
+	font-family: sans-serif;
+}
+
+.container {
+	width: 100%;
+	height: 100vh;
+}
 </style>

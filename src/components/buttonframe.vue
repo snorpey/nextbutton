@@ -1,12 +1,12 @@
 <template>
 	<div class="button-frame">
-	YOLO
 		<iframe :src="src" class="iframe"></iframe>
 	</div>
 </template>
 
 <style>
-.iframe { border: none; }
+.iframe { border: none; width: 100%; height: 100%; display: block; }
+.button-frame { width: 100%; height: 100%; }
 </style>
 
 <script>
@@ -82,6 +82,11 @@ export default {
 			setTimeout( function () {
 				this.$router.push( { name: 'button', params: { buttonId: this.nextItem.id } } );
 			}.bind( this ), 1500 );
+		}
+	},
+	watch: {
+		itemIndex: function () {
+			this.updateItemIndex();
 		}
 	}
 }
