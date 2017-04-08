@@ -1,7 +1,78 @@
-<button>BUTTON ZWEI</button>
+<button>BUTTON TWO</button>
+<style>
+html {
+	background-color: #06f;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	position: relative;
+	padding: 0;
+}
+
+button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transition: opacity 1s ease;
+	opacity: 0;
+	transform: translateX(-50%) translateY(-50%);
+	border: 1px transparent solid;
+	background: transparent;
+	font-family: sans-serif;
+	color: #fff;
+	font-size: 20px;
+	opacity: 0;
+	padding: 10px;
+	cursor: pointer;
+}
+
+button.loaded {
+	opacity: 0.7;
+}
+
+button.loaded:hover {
+	opacity: 1;
+}
+
+button.is-out {
+	opacity: 0;
+}
+
+.button.error {
+	border-color: red;
+}
+
+</style>
 <script src="api.js"></script>
 <script>
-document.querySelector( 'button' ).addEventListener( 'click', () => {
-	api.nextClick( 200 );
+var buttonEl = document.querySelector( 'button' );
+
+buttonEl.addEventListener( 'click', function () {
+	api.click();
+	buttonEl.classList.add( 'is-out' );
 } );
+
+// everything was loaded
+api.loaded = function () {
+	buttonEl.classList.add( 'loaded' );
+};
+
+// is called 500ms before the next frame is loaded,
+// so we have time to animate out
+api.beforeDestroy = function () {
+	
+};
+
+// is called if the user clicks on the button multiple times
+api.clickDeclined = function () {
+	buttonEl.classList.add( 'error' );
+	setTimeout( function () { buttonEl.classList.remove( 'error' ) }, 40 );
+};
 </script>
