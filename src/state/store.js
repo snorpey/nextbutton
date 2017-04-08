@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { loadJSON } from '../util/load.js';
+import { stringToSlug } from '../util/string.js';
 
 Vue.use( Vuex )
 
@@ -16,6 +17,7 @@ const state = {
 // for debugging purposes.
 const mutations = {
 	add ( state, item ) {
+		item.id = stringToSlug( item.name || 'item-' + state.items.length );
 		state.items.push( item );
 	},
 	next ( state ) {
@@ -24,6 +26,9 @@ const mutations = {
 		} else {
 			state.currentItemIndex++;
 		}
+	},
+	index ( state, index ) {
+		state.currentItemIndex = index;
 	}
 };
 
@@ -40,6 +45,9 @@ const actions = {
 		setTimeout( () => {
 			commit( 'next' );
 		}, delay )
+	},
+	index: function ( { commit }, newIndex ) {
+		commit( 'index', newIndex );
 	}
 };
 

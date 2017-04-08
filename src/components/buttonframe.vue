@@ -1,5 +1,6 @@
 <template>
 	<div class="button-frame">
+	YOLO
 		<iframe :src="src" class="iframe"></iframe>
 	</div>
 </template>
@@ -12,13 +13,13 @@
 
 export default {
 	name: 'buttonframe',
-	props: [ 'src' ],
 	data: function () {
 		return {
 			iframeEl: null
 		}
 	},
 	mounted: function () {
+		this.updateItemIndex();
 		this.iframeEl = this.$el.querySelector( '.iframe' );
 		this.iframeEl.addEventListener( 'load', this.frameLoaded.bind( this ) );
 	},
@@ -29,6 +30,20 @@ export default {
 			if ( this.iframeEl.contentWindow ) {
 				this.iframeEl.contentWindow.removeEventListener( 'message', this.messageReceived.bind( this ) );
 			}
+		}
+	},
+	computed: {
+		src: function () {
+			const item = this.$store.state.items[this.itemIndex];
+			return item ? item.url : '';
+		},
+		itemIndex: function () {
+			const index = this.itemIndexById( this.$route.params.buttonId );
+			return index > -1 ? index : 0;
+		},
+		nextItem: function () {
+			const nextItemIndex = this.itemIndex + 1 >= this.$store.state.items.length ? 0 : this.itemIndex + 1;
+			return this.$store.state.items[nextItemIndex];
 		}
 	},
 	methods: {
@@ -43,13 +58,30 @@ export default {
 				const type = event.data.type;
 								
 				if ( type === 'click' ) {
-					this.$store.dispatch( 'next', 1500 );
-
-					setTimeout( function () {
-						this.iframeEl.contentWindow.postMessage( { type: 'beforeDestroy' }, location.origin );
-					}.bind( this ), 1000 );
+					this.next();
 				}
 			}
+		},
+		itemIndexById: function ( id ) {
+			return this.$store.state.items.reduce( function ( result, item, index ) {
+				if ( item.id === id ) { result = index; }
+				return result;
+			}, -1 );
+		},
+		nextItemIndex: function () {
+			return this.itemIndex + 1;
+		},
+		updateItemIndex: function () {
+			this.$store.dispatch( 'index', this.itemIndex );
+		},
+		next: function () {
+			setTimeout( function () {
+				this.iframeEl.contentWindow.postMessage( { type: 'beforeDestroy' }, location.origin );
+			}.bind( this ), 1000 );
+			
+			setTimeout( function () {
+				this.$router.push( { name: 'button', params: { buttonId: this.nextItem.id } } );
+			}.bind( this ), 1500 );
 		}
 	}
 }

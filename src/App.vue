@@ -1,6 +1,7 @@
 <template>
 	<div class="container">
-		<buttonframe :src="iframeSrc"></buttonframe>
+		<!-- <buttonframe :src="iframeSrc"></buttonframe> -->
+		<router-view/>
 		<info />
 	</div>
 </template>
@@ -15,14 +16,6 @@ export default {
 	components: { buttonframe, info },
 	mounted: function () {
 		this.$store.dispatch( 'load' );
-	},
-	computed: {
-		iframeSrc: function () {
-			const index = this.$store.state.currentItemIndex;
-			const item = this.$store.state.items[index];
-
-			return item ? item.url : '';
-		}
 	}
 }
 </script>
