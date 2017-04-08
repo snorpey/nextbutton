@@ -10,7 +10,6 @@ var api = {
 	},
 
 	loaded: function () { },
-	destroyCountDown: function ( remainingTime ) { },
 	beforeDestroy: function () { },
 	clickDeclined: function () { }
 };
@@ -18,7 +17,6 @@ var api = {
 window.addEventListener( 'message', function ( event ) {
 	if ( event && event.data ) {
 		var type = event.data.type;
-		var message = event.data.message;
 
 		if ( type === 'load' ) {
 			if ( typeof api.loaded === 'function' ) {
@@ -34,7 +32,7 @@ window.addEventListener( 'message', function ( event ) {
 
 		if ( type === 'beforeDestroy' ) {
 			if ( typeof api.beforeDestroy === 'function' ) {
-				api.beforeDestroy( message );
+				api.beforeDestroy();
 			}
 		}
 	}
