@@ -3,6 +3,7 @@
 		{
 			"name": "test button 01",
 			"url": "items/btn-01.html",
+			"backgroundColor": "red",
 			"meta": {
 				"author": {
 					"name": "snorpey",
@@ -14,6 +15,7 @@
 		{
 			"name": "test button 02",
 			"url": "items/btn-02.html",
+			"backgroundColor": "#06f",
 			"meta": {
 				"author": {
 					"name": "snorpey",

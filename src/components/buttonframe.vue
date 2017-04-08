@@ -1,11 +1,11 @@
 <template>
 	<div class="button-frame">
-		<iframe :src="src" class="iframe"></iframe>
+		<iframe :src="src" class="iframe" :style="frameStyle"></iframe>
 	</div>
 </template>
 
 <style>
-.iframe { border: none; width: 100%; height: 100%; display: block; }
+.iframe { border: none; width: 100%; height: 100%; display: block; transition: background-color 0.3s ease; }
 .button-frame { width: 100%; height: 100%; }
 </style>
 
@@ -34,16 +34,23 @@ export default {
 	},
 	computed: {
 		src: function () {
-			const item = this.$store.state.items[this.itemIndex];
-			return item ? item.url : '';
+			return this.currentItem ? this.currentItem.url : '';
 		},
 		itemIndex: function () {
 			const index = this.itemIndexById( this.$route.params.buttonId );
 			return index > -1 ? index : 0;
 		},
+		currentItem: function () {
+			return this.$store.state.items[this.itemIndex];
+		},
 		nextItem: function () {
 			const nextItemIndex = this.itemIndex + 1 >= this.$store.state.items.length ? 0 : this.itemIndex + 1;
 			return this.$store.state.items[nextItemIndex];
+		},
+		frameStyle: function () {
+			return {
+				backgroundColor: ( this.currentItem && this.currentItem.backgroundColor ) ? this.currentItem.backgroundColor : '#fff'
+			};
 		}
 	},
 	methods: {
