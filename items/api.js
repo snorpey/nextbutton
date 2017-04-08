@@ -1,15 +1,16 @@
 var api = {
 	wasClicked: false,
-	click: function ( delay ) {
+	click: function () {
 		if ( ! api.wasClicked ) {
 			api.wasClicked = true;
-			window.postMessage( { type: 'click', message: delay }, location.origin );
+			window.postMessage( { type: 'click' }, location.origin );
 		} else {
 			api.clickDeclined();
 		}
 	},
 
 	loaded: function () { },
+	nextRequested: function () { },
 	beforeDestroy: function () { },
 	clickDeclined: function () { }
 };
@@ -21,6 +22,12 @@ window.addEventListener( 'message', function ( event ) {
 		if ( type === 'load' ) {
 			if ( typeof api.loaded === 'function' ) {
 				api.loaded();
+			}
+		}
+
+		if ( type === 'nextRequested' ) {
+			if ( typeof api.nextRequested === 'function' ) {
+				api.nextRequested();
 			}
 		}
 

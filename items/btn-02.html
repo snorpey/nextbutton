@@ -54,20 +54,15 @@ button.is-out {
 <script>
 var buttonEl = document.querySelector( 'button' );
 
-buttonEl.addEventListener( 'click', function () {
-	api.click();
+buttonEl.addEventListener( 'click', api.click );
+
+api.nextRequested = function () {
 	buttonEl.classList.add( 'is-out' );
-} );
+};
 
 // everything was loaded
 api.loaded = function () {
 	buttonEl.classList.add( 'loaded' );
-};
-
-// is called 500ms before the next frame is loaded,
-// so we have time to animate out
-api.beforeDestroy = function () {
-	
 };
 
 // is called if the user clicks on the button multiple times

@@ -30,11 +30,7 @@ function log ( str ) {
 	logEl.appendChild( liEl );
 }
 
-buttonEl.addEventListener( 'click', function () {
-	log( 'clicked' );
-	api.click();
-	buttonEl.classList.add( 'is-out' );
-} );
+buttonEl.addEventListener( 'click', api.click );
 
 // everything was loaded
 api.loaded = function () {
@@ -47,6 +43,12 @@ api.loaded = function () {
 	setTimeout( function () {
 		log( 'btn animatedIn' );
 	}, 600 );
+};
+
+// user clicked and next button has been requested
+api.nextRequested = function () {
+	buttonEl.classList.add( 'is-out' );
+	log( 'nextRequested' );
 };
 
 // is called 500ms before the next frame is loaded,

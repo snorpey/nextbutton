@@ -75,6 +75,8 @@ export default {
 			this.$store.dispatch( 'index', this.itemIndex );
 		},
 		next: function () {
+			this.iframeEl.contentWindow.postMessage( { type: 'nextRequested' }, location.origin );
+
 			setTimeout( function () {
 				this.iframeEl.contentWindow.postMessage( { type: 'beforeDestroy' }, location.origin );
 			}.bind( this ), 1000 );

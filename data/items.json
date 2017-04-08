@@ -5,10 +5,10 @@
 			"url": "items/btn-01.html",
 			"meta": {
 				"author": {
-					"name": "Georg Fischer",
-					"url": "http://snorpey.com",
-					"date": "2017"
-				}
+					"name": "snorpey",
+					"url": "http://snorpey.com"
+				},
+				"date": "2017"
 			}
 		},
 		{
@@ -16,10 +16,10 @@
 			"url": "items/btn-02.html",
 			"meta": {
 				"author": {
-					"name": "Georg Fischer",
-					"url": "http://snorpey.com",
-					"date": "2017"
-				}
+					"name": "snorpey",
+					"url": "http://snorpey.com"
+				},
+				"date": "2017"
 			}
 		}
 	]
