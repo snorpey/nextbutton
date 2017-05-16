@@ -1,5 +1,7 @@
 # nextbutton
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/snorpey/nextbutton.svg)](https://greenkeeper.io/)
+
 > a button gallery
 
 ## build setup
